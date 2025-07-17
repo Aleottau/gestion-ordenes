@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-black-800 to-indigo-600 flex items-center justify-center">
+  <div class="min-h-screen bg-gradient-to-br from-black to-indigo-600 flex items-center justify-center">
     <div class="bg-white p-8 rounded-xl shadow-xl w-full max-w-md text-center relative z-10">
       <h1 class="text-2xl font-bold text-gray-800 mb-2">¡Bienvenido!</h1>
       <p class="text-sm text-gray-500 mb-6">Inicia sesión para continuar</p>

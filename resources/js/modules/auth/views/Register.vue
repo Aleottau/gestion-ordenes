@@ -1,31 +1,77 @@
 <template>
-    <div class="container">
-      <h2>Registro</h2>
-      <form>
-        <input type="text" placeholder="Nombre completo" />
-        <input type="email" placeholder="Correo electrónico" />
-        <input type="password" placeholder="Contraseña" />
-        <button type="submit">Registrarse</button>
+  <div class="min-h-screen bg-gradient-to-br from-black to-indigo-600 flex items-center justify-center">
+    <div class="bg-white p-8 rounded-xl shadow-xl w-full max-w-md text-center">
+      <h1 class="text-2xl font-bold text-gray-800 mb-2">Crear cuenta</h1>
+      <p class="text-sm text-gray-500 mb-6">Completa los campos para registrarte</p>
+
+      <form class="space-y-5" @submit.prevent="handleRegister">
+        <base-input
+          v-model="name"
+          type="text"
+          placeholder="Nombre completo"
+        />
+
+        <base-input
+          v-model="email"
+          type="email"
+          placeholder="Correo electrónico"
+        />
+        <p v-if="errors.email" class="text-red-600 text-sm text-left pl-1 mt-0.5">
+          {{ errors.email }}
+        </p>
+
+
+        <div class="relative">
+          <base-input
+            :type="showPassword ? 'text' : 'password'"
+            v-model="password"
+            placeholder="Contraseña"
+          />
+          <span
+            @click="togglePassword"
+            class="absolute right-4 top-3.5 cursor-pointer text-gray-500 text-sm"
+            title="Mostrar u ocultar"
+          >
+            👁️
+          </span>
+        </div>
+
+        <base-input
+          v-model="confirmPassword"
+          :type="showPassword ? 'text' : 'password'"
+          placeholder="Confirmar contraseña"
+        />
+        <p v-if="errors.confirmPassword" class="text-red-600 text-sm text-left mt-1 pl-1">
+          {{ errors.confirmPassword }}
+        </p>
+
+
+        <base-button type="submit">Registrarse</base-button>
+        
+
       </form>
-      <router-link to="/login">¿Ya tienes cuenta? Inicia sesión</router-link>
+
+      <div class="mt-6 text-sm text-gray-500">
+        ¿Ya tienes una cuenta?
+        <router-link to="/login" class="text-indigo-600 hover:underline">Inicia sesión</router-link>
+      </div>
     </div>
-  </template>
-  
-  <style scoped>
-  .container {
-    max-width: 400px;
-    margin: auto;
-    padding-top: 50px;
-    text-align: center;
-  }
-  input {
-    display: block;
-    margin: 10px auto;
-    padding: 8px;
-    width: 100%;
-  }
-  button {
-    margin-top: 10px;
-  }
-  </style>
-  
+  </div>
+</template>
+
+<script setup>
+import BaseInput from '@/modules/auth/components/base-input.vue'
+import BaseButton from '@/modules/auth/components/base-button.vue'
+import useRegister from '@/modules/auth/composables/useRegister.js'
+
+const {
+  name,
+  email,
+  password,
+  confirmPassword,
+  showPassword,
+  togglePassword,
+  handleRegister,
+  errors
+} = useRegister()
+</script>
